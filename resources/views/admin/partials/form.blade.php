@@ -38,6 +38,21 @@
         @enderror    
     </div>
 
+     {{-- Type selector --}}
+    <div class="mb-3">
+        <label for="type_id" class="form-label">Project type</label>
+       <select name="type_id" class="form-select @error('type') is-invalid @enderror">
+        @foreach ($types as $type)
+            <option value="{{ $type->id }}" {{ old('type_id', $project->type_id ) == $type->id ? 'selected' : '' }}> {{ $type->name }}</option>
+        @endforeach    
+       </select>
+        @error('type')
+            <div class="invalid-feedback">
+                {{ $message }}
+            </div>
+        @enderror    
+    </div>
+
     {{-- File upload --}}
     <div class="mb-3">
         <label for="image" class="form-label">Project Image</label>
