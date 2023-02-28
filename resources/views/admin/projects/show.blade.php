@@ -8,9 +8,7 @@
             <div class="card-body">
               <h5 class="card-title">{{ $project->title }}</h5>
               <p>Created: <small>{{ $project->created }}</small></p>
-              @if ( {{ $project->type_id }} )
-              <p>Type: <small>{{ $project->type_id }}</small></p>
-              @endif
+              <p>Type: <small>{{ $project->type->name }}</small></p>
               <p class="card-text">{{ $project->description }}</p>
 
               {{-- Action buttons --}}
