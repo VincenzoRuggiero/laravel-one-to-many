@@ -14,9 +14,11 @@
                       <tr>
                         <th>#ID</th>
                         <th>Title</th>
-                        <th >Description</th>
+                        <th>Description</th>
+                        <th>Type</th>
                         <th>Link</th>
                         <th>Created</th>
+                        <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -25,6 +27,7 @@
                         <th>{{ $project->id }}</th>
                         <td>{{ $project->title }}</td>
                         <td>{{ $project->description }}</td>
+                        <td>{{ $project->type->name }}</td>
                         <td>{{ $project->link }}</td>
                         <td>{{ $project->created }}</td>
                         <td>
