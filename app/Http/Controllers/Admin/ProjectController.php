@@ -54,7 +54,7 @@ class ProjectController extends Controller
             'link' => 'required|url|max:400|unique:projects',
             'created' => 'required|date',
             'image' => 'required|image|max:2048',
-            'type_id' => 'required|exists:types,id'
+            'type_id' => 'exists:types,id'
         ], 
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
@@ -66,7 +66,7 @@ class ProjectController extends Controller
             'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
             'image.required' => 'File immagine mancante',
-            'image.max' => 'Il file supera i 2mb di dimensione massima'
+            'image.max' => 'Il file supera i 2mb di dimensione massima',
         ]);
 
         $formData['slug'] = Str::slug($formData['title']); //Makes a new string title from matching id
@@ -120,7 +120,7 @@ class ProjectController extends Controller
             'link' => ['required', 'max:400', 'url', Rule::unique('projects')->ignore($project->id)],
             'created' => 'required|date',
             'image' => 'required|image|max:2048',
-            'type_id' => 'required|exists:types,id'
+            'type_id' => 'exists:types,id'
         ],
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
@@ -132,7 +132,7 @@ class ProjectController extends Controller
             'link.url' => 'Inserisci una URL valida',
             'created.required' => 'Inserire la data mancante',
             'image.required' => 'File immagine mancante',
-            'image.max' => 'Il file supera i 2mb di dimensione massima'
+            'image.max' => 'Il file supera i 2mb di dimensione massima',
         ]);
 
         $project->update($formData);
