@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Type;
 use App\Models\Project;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -24,7 +25,7 @@ class ProjectController extends Controller
         //$projects = Project::simplePaginate(20);  >Paginates without showing the number of pages left
         //$projects = Project::orderBy('created', 'DESC')->paginate(20); >Paginates and sorts items from recent to  oldest
         
-        $projects = Project::orderBy('created', 'desc')->paginate(20);  //Paginates and shows declared amount of items
+        $projects = Project::orderBy('id', 'desc')->paginate(20);  //Paginates and shows declared amount of items
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -35,7 +36,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('admin.projects.create', ["project" => new Project()]);
+        return view('admin.projects.create', ["project" => new Project(), "types" => Type::all()]);
     }
 
     /**
@@ -52,7 +53,8 @@ class ProjectController extends Controller
             'description' => 'required|max:400',
             'link' => 'required|url|max:400|unique:projects',
             'created' => 'required|date',
-            'image' => 'required|image|max:2048'
+            'image' => 'required|image|max:2048',
+            'type_id' => 'required|exists:types,id'
         ], 
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
@@ -100,7 +102,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view('admin.projects.edit', compact('project'));
+        return view('admin.projects.edit', ["project" => $project, "types" => Type::all()]);
     }
 
     /**
@@ -117,7 +119,8 @@ class ProjectController extends Controller
             'description' => ['required', 'max:400'],
             'link' => ['required', 'max:400', 'url', Rule::unique('projects')->ignore($project->id)],
             'created' => 'required|date',
-            'image' => 'required|image|max:2048'
+            'image' => 'required|image|max:2048',
+            'type_id' => 'required|exists:types,id'
         ],
         [
             'title.required' => 'Il titolo non può essere lasciato vuoto',
