@@ -76,7 +76,7 @@
     </div>
     <div class="mb-3">
         <button type="submit" class="btn btn-primary">
-            Save
+            {{ $routeName == 'admin.projects.update' ? 'Update project' : 'Create project' }}
         </button>
     </div>
 </form>
